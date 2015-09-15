@@ -5,14 +5,14 @@ public class MaxHeap {
 
 
     //protected data field (member variable) of type int array
-    private int[] heapValues= {};
+    protected int[] heapValues = {};
 
     /**
      * A protected data field of type int called heapsize. Array indices 0 to heapsize - 1
      * are defined to be "in the heap," and any values after that are not. You may write your code
      * with one-indexing or zero-indexing. Bear in mind the pseudocode uses one indexing!
      */
-    private int heapsize;
+    protected int heapsize;
     /**
      * A public constructor method with an int array parameter.  This constructor will take an int array filled with
      * arbitrary values as a parameter, make a copy of it into its data field array made the same length, set heapsize
