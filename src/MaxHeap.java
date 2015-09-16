@@ -1,3 +1,5 @@
+
+//package maxheap;
 import java.util.Arrays;
 
 /**
@@ -12,7 +14,7 @@ public class MaxHeap {
     /**
      * A protected data field of type int called heapsize. Array indices 0 to heapsize - 1
      * are defined to be "in the heap," and any values after that are not. You may write your code
-     * with one-indexing or zero-indexing. Bear in mind the pseudocode uses one indexing!
+     * with one-indexing or zero-indexing. Bear in mind the pseudocode uses one indexing!Ï
      */
     protected int heapsize;
 
@@ -24,11 +26,11 @@ public class MaxHeap {
      * method in the constructor, or you can do it yourself.
      */
     public MaxHeap(int[] array) {
-       // this.heapValues = Arrays.copyOf(array, array.length);
-        this.array = new int[array.length + 1];
+        // this.heapValues = Arrays.copyOf(array, array.length);
+        this.array = new int[array.length];
         this.heapsize = array.length;
         for (int i = 0; i < array.length; i++) {
-            this.array[i+1] = array[i];
+            this.array[i] = array[i];
         }
 
         buildMaxHeap();
@@ -39,19 +41,19 @@ public class MaxHeap {
      need to convert to a one-indexing by adding 1, then compute the parent's index, then finally subtract 1 to go back
      to zero-indexing.
      */
-     protected int parentOf(int n) {
-         //if ((index-1)/2 >= 0) return (index-1)/2;   this is for 0 indexing, 1 index would just be n/2
-         if (n/2 > 0) return n/2;
-         return -1;
-     }
+    protected int parentOf(int n) {
+        if ((n-1)/2 >= 0) return (n-1)/2;   //this is for 0 indexing, 1 index would just be n/2
+        //if (n/2 > 0) return n/2;
+        return -1;
+    }
 
-/**
- * A protected method named leftChildOf, which takes an index parameter. Return the index where the left child is stored.
- * Indices beyond the end of the heap have no children, so return -1. If the left child is beyond the end of the heap,
- * return -1. Don't forget the zero indexing!
- */
+    /**
+     * A protected method named leftChildOf, which takes an index parameter. Return the index where the left child is stored.
+     * Indices beyond the end of the heap have no children, so return -1. If the left child is beyond the end of the heap,
+     * return -1. Don't forget the zero indexing!
+     */
     protected int leftChildOf(int n) {
-        if (2*n <= array.length) return 2*n;
+        if ((2*n + 1) < array.length) return (2*n) + 1;
         return -1;
     }
 
@@ -61,7 +63,7 @@ public class MaxHeap {
      * of the heap, return -1. Don't forget the zero indexing!
      */
     protected int rightChildOf(int n) {
-        if ((2*(n+1)) <= array.length) return (2*(n+1));
+        if (((2 * n + 1) + 1) < array.length) return (2*n+1) + 1;
         return -1;
     }
     /**
@@ -71,7 +73,7 @@ public class MaxHeap {
      * indices from 0 to heapSize-1 inclusive, so you may want to use java.util.Arrays.copyOfRange before invoking
      * java.util.Arrays.toString.
      */
-    public String printMaxHeap(int[] array){
+    public String printMaxHeap(){
         System.out.println("The length of the array is: " +array.length);
         String result = "";
         for (int i = 0; i < array.length; i++) {
@@ -99,14 +101,14 @@ public class MaxHeap {
      */
     protected void maxHeapify(int i) {
         int largest = i;
-        int left = 2 * i;
-        int right = 2 * i+1;
-        if (left > 0) {
+        int left = leftChildOf(i);
+        int right = rightChildOf(i);
+        if (left > -1) {
             if (left <= heapsize && array[left] > array[i]) largest = left;
             else largest = i;
         }
 
-        if (right > 0) {
+        if (right > -1) {
             if (right <= heapsize && array[right] > array[largest]) largest = right;
         }
         if (largest != i) {
@@ -131,7 +133,7 @@ public class MaxHeap {
          MAX-HEAPIFY(A, i)
 
          */
-        for (int i = heapsize / 2;i > 0; i--) {
+        for (int i = heapsize / 2;i > -1; i--) {
             maxHeapify(i);
         }
     }
@@ -157,7 +159,7 @@ public class MaxHeap {
             array[1] = array[i];
             array[i] = swap;
             // not sure if this is done by decrementing i or if I need to explicitly decrement heapsize...?
-             heapsize--;
+            heapsize--;
         }
         maxHeapify(1);
         heapsize = backUpCopy;
