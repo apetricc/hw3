@@ -5,16 +5,26 @@ public class RunMaxHeap {
 
 
     public static void main(String[] args) {
-        int[] myArr = {1, 22, 8, 4, 15, 6, 7, 99};
-        MaxHeap myMaxHeap = new MaxHeap(myArr);
-        myMaxHeap.heapsort();
-        System.out.println(myMaxHeap.printMaxHeap());
+        int[] myArr1 = {1, 22, 8, 4, 15, 9, 7, 99};
+        MaxHeap myHeap = new MaxHeap(myArr1);
+        System.out.println("This is the original array:      "+java.util.Arrays.toString(myArr1));
+        System.out.println("The heap ended up like this:     " + myHeap.printMaxHeap());
+        myHeap.heapsort();
+        System.out.println("This is the heap after heapsort: " + myHeap.printMaxHeap());
 
-        for (int i = 0; i < myArr.length - 1; i++) {
-            System.out.println("The parent of " + i + " is:" + myMaxHeap.parentOf(i));
-            System.out.println("The left child of index " +i +" is: " + myMaxHeap.leftChildOf(i));
-            System.out.println("The right child of index " +i  +" is: " + myMaxHeap.rightChildOf(i));
-        }
+        int[] myArr2 = {8,6,7};
+        MaxHeap myHeap2 = new MaxHeap(myArr2);
+        System.out.println("This is the original array:      "+java.util.Arrays.toString(myArr2));
+        System.out.println("The heap ended up like this:     " + myHeap2.printMaxHeap());
+        myHeap2.heapsort();
+        System.out.println("This is the heap after heapsort: " + myHeap2.printMaxHeap());
+
+
+
+
+
+
+
 
     }
 }

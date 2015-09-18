@@ -1,7 +1,5 @@
 
 //package maxheap;
-import java.util.Arrays;
-
 /**
  * Created by petriccione on 9/11/15.
  */
@@ -42,7 +40,8 @@ public class MaxHeap {
      to zero-indexing.
      */
     protected int parentOf(int n) {
-        if ((n-1)/2 >= 0) return (n-1)/2;   //this is for 0 indexing, 1 index would just be n/2
+        if (n == 0) return -1;
+        if ((n-1)/2 > -1) return (n-1)/2;   //this is for 0 indexing, 1 index would just be n/2
         //if (n/2 > 0) return n/2;
         return -1;
     }
@@ -104,16 +103,13 @@ public class MaxHeap {
         int left = leftChildOf(i);
         int right = rightChildOf(i);
         if (left > -1) {
-            if (left <= heapsize && array[left] > array[i]) largest = left;
+            if (left < heapsize && array[left] > array[i]) largest = left;
             else largest = i;
         }
-
         if (right > -1) {
-            if (right <= heapsize && array[right] > array[largest]) largest = right;
+            if (right < heapsize && array[right] > array[largest]) largest = right;
         }
         if (largest != i) {
-            //swap array[i] with array[largest]
-            //max-heapify(array, largest)
             int swap = array[i];
             array[i] = array[largest];
             array[largest] = swap;
@@ -154,15 +150,19 @@ public class MaxHeap {
     public void heapsort() {
         buildMaxHeap();
         int backUpCopy = heapsize;
-        for (int i = heapsize;i < 1; i-- ) {
-            int swap = array[1];
-            array[1] = array[i];
+        for (int i = heapsize - 1;i >= 0; i-- ) {
+            int swap = array[0];
+            array[0] = array[i];
             array[i] = swap;
             // not sure if this is done by decrementing i or if I need to explicitly decrement heapsize...?
             heapsize--;
+  //          printMaxHeap();
+            maxHeapify(0);
+//            printMaxHeap();
         }
-        maxHeapify(1);
+
         heapsize = backUpCopy;
     }
 
 }
+
