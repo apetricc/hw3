@@ -2,6 +2,7 @@
 //package maxheap;
 /**
  * Created by petriccione on 9/11/15.
+ * csci 333 fall 2015 Professor Whitley
  */
 public class MaxHeap {
 
